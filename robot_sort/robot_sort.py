@@ -97,7 +97,43 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        
+        # Algorithm 
+        
+        # When it goes through the array without a swap the list is sorted.
+        # The light can be used to indicate if a sort happened on that pass through.
+        # Light starts off and while light isoff the robot can move right.
+        # Then pick up first item and move it right
+        # Then compare:
+
+        # if held item > item
+        #     swap
+        #     move left
+        #     swap
+        #     move right
+        # otherwise
+        #     move left
+        #     put item back
+        #     move right
+        
+        while True:
+                if not self.light_is_on():
+                    # If light is off, turn it on. Light will be turned off if a sort happens
+                    self.set_light_on()
+                    while self.can_move_right():
+                        # If held item is less than item at position or no item is held, swap 
+                        if self.compare_item() == -1 or self.compare_item() == None:
+                            self.swap_item()
+                        self.move_right()
+                    while self.can_move_left():
+                        if self.compare_item() == 1:
+                        # If no sort happens on the way left then the list is sorted so the light stays on
+                        # If a sort happens on the way left the light turns off so the sort can be repeated
+                            self.set_light_off()
+                            self.swap_item()
+                        self.move_left()
+                else:
+                    break
 
 
 if __name__ == "__main__":
